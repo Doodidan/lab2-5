@@ -10,20 +10,24 @@
 
 class Object2DA9 {
 public:
+    Object2DA9(double i = 0, double tangle = 0, Point2D tcentre = Point2D(0, 0));
+    Object2DA9(double ta, double tb, double tc, double td, double tangle = 0, Point2D tcentre = Point2D(0, 0));
+    ~Object2DA9();
     double getA() const;
     double getB() const;
     double getC() const;
     double getD() const;
     double getAngle() const;
     Point2D getCentre() const;
-    void setB(double b);
-    void setC(double c);
-    void setD(double d);
-    void setAngle(double angle);
-    void setCentre(const Point2D &centre);
-    void move(double x, double y, double angle = 0);
-    void move(const Point2D &delta, double angle = 0);
-    void rotate(double angle);
+    void setA(double ta);
+    void setB(double tb);
+    void setC(double tc);
+    void setD(double td);
+    void setAngle(double tangle);
+    void setCentre(const Point2D &tcentre);
+    void move(double x, double y, double tangle = 0);
+    void move(const Point2D &delta, double tangle = 0);
+    void rotate(double tangle);
     bool IsInside(const Point2D &point) const;
 private:
     double a, b, c, d, angle;

@@ -10,10 +10,14 @@
 
 class Point2D {
 public:
+    Point2D();
+    Point2D(double a);
+    Point2D(double tx, double ty);
+    ~Point2D();
     double getX() const;
     double getY() const;
-    void setX(double x);
-    void setY(double y);
+    void setX(double tx);
+    void setY(double ty);
 private:
     double x, y;
 };
