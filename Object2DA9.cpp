@@ -11,20 +11,29 @@
 
 Object2DA9::Object2DA9(double ta, double tb, double tc, double td, double tangle, const Point2D* tcentre) {
     bool verification = false;
-    a = ta;
-    if ((2 * tb) <= a) {
-        b = tb;
-    } else {
-        verification = true;
-    };
-    if ((tc<=a)&&((b + hypotenuse(tc) / 2) < hypotenuse(a, a / 2))) {
-        c = tc;
-    } else {
-        verification = true;
-    };
-    if (!setD(td)) {
-        verification = true;
-    };
+    do {
+        if ((ta < 0) || (tb < 0) || (tc < 0) || (td < 0)) {
+            verification = true;
+            break;
+        };
+        a = ta;
+        if ((2 * tb) <= a) {
+            b = tb;
+        } else {
+            verification = true;
+            break;
+        };
+        if ((tc <= a)&&((b + hypotenuse(tc) / 2) < hypotenuse(a, a / 2))) {
+            c = tc;
+        } else {
+            verification = true;
+            break;
+        };
+        if (!setD(td)) {
+            verification = true;
+            break;
+        };
+    } while (0);
     if (verification) {
         a = b = c = d = 0;
     }
@@ -176,18 +185,22 @@ double Object2DA9::hypotenuse(double a) const {
 }
 
 bool Object2DA9::checkA(double ta) const {
+    if (ta < 0) return false;
     return ((b + d) < hypotenuse(ta, ta / 2)) && ((b + hypotenuse(c) / 2) < hypotenuse(ta, ta / 2)) && ((c + d) <= ta) && (2 * b <= ta);
 }
 
 bool Object2DA9::checkB(double tb) const {
+    if (tb < 0) return false;
     return ((tb + d) < hypotenuse(a, a / 2)) && ((tb + hypotenuse(c) / 2) < hypotenuse(a, a / 2)) && (2 * tb <= a);
 }
 
 bool Object2DA9::checkC(double tc) const {
+    if (tc < 0) return false;
     return ((b + hypotenuse(tc) / 2) < hypotenuse(a, a / 2)) && ((tc + d) <= a);
 }
 
 bool Object2DA9::checkD(double td) const {
+    if (td < 0) return false;
     return ((b + td) < hypotenuse(a, a / 2)) && ((c + td) <= a);
 }
 
