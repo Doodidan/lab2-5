@@ -10,10 +10,9 @@
 
 #include "Point2D.h"
 
-
 class Object2DA9 {
 public:
-    Object2DA9(double ta, double tb, double tc, double td, double tangle = 0, const Point2D* tcentre = &(new Point2D));
+    Object2DA9(double ta, double tb, double tc, double td, double tangle = 0, const Point2D* tcentre = new Point2D);
     ~Object2DA9();
     double getA() const;
     double getB() const;
@@ -33,7 +32,7 @@ public:
     bool IsInside(const Point2D* startPoint) const;
 private:
     double a, b, c, d, angle;
-    Point2D* centre = &(new Point2D);
+    Point2D* centre;
     Point2D* moveAndRotatePoint(const Point2D* startPoint) const;
     Point2D* movePoint(const Point2D* point) const;
     double hypotenuse(double x, double y) const;

@@ -8,6 +8,8 @@
 #ifndef POINT2D_H
 #define	POINT2D_H
 
+using namespace std;
+
 class Point2D {
 public:
     Point2D(double a = 0);

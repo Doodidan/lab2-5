@@ -5,18 +5,24 @@
  * Created on 14 Декабрь 2014 г., 11:07
  */
 
+#include <cmath>
 #include <math.h>
 #include "Object2DA9.h"
 #include "Point2D.h"
 
-Object2DA9::Object2DA9(double ta, double tb, double tc, double td, double tangle = 0, const Point2D* tcentre = &(new Point2D)) {
+Object2DA9::Object2DA9(double ta, double tb, double tc, double td, double tangle, const Point2D* tcentre) {
     setA(ta);
     setB(tb);
     setC(tc);
     setD(td);
     setAngle(tangle);
-    //    centre = &(new Point2D);
+    centre = new Point2D;
     setCentre(tcentre);
+}
+
+Object2DA9::~Object2DA9() {
+    delete centre;
+    centre = 0;
 }
 
 double Object2DA9::getA() const {
@@ -40,10 +46,10 @@ double Object2DA9::getAngle() const {
 }
 
 Point2D* Object2DA9::getCentre() const {
-    Point2D tcentre = new Point2D;
-    tcentre.setX(centre->getX());
-    tcentre.setY(centre->getY());
-    return &tcentre;
+    Point2D* tcentre = new Point2D;
+    tcentre->setX(centre->getX());
+    tcentre->setY(centre->getY());
+    return tcentre;
 }
 
 bool Object2DA9::setA(double ta) {
@@ -107,7 +113,10 @@ bool Object2DA9::rotate(double tangle) {
 
 bool Object2DA9::IsInside(const Point2D* startPoint) const {
     Point2D* point = moveAndRotatePoint(startPoint);
-    return checkInside(point);
+    bool check = checkInside(point);
+    delete point;
+    point = 0;
+    return check;
 }
 
 Point2D* Object2DA9::moveAndRotatePoint(const Point2D* startPoint) const {
@@ -121,11 +130,11 @@ Point2D* Object2DA9::moveAndRotatePoint(const Point2D* startPoint) const {
 }
 
 Point2D* Object2DA9::movePoint(const Point2D* point) const {
-    return &(new Point2D(point->getX() - centre->getX(), point->getY() - centre->getY()));
+    return new Point2D(point->getX() - centre->getX(), point->getY() - centre->getY());
 }
 
 double Object2DA9::hypotenuse(double x, double y) const {
-    return sqrt(x^2 + y^2);
+    return sqrt(pow(x, 2) + pow(y, 2));
 }
 
 double Object2DA9::hypotenuse(double a) const {
@@ -149,5 +158,5 @@ bool Object2DA9::checkD(double td) const {
 }
 
 bool Object2DA9::checkInside(const Point2D* point) const {
-    return (abs(point->getX()) <= a / 2) && (abs(point->getY()) <= a / 2) && (((point->getX() - a / 2)^2 + point->getY()^2) >= b^2) && (point->getY() <= (point->getX() + a - c)) && (((point->getX() + a / 2)^2 + (point->getY() + a / 2)^2) >= d^2);
+    return (abs(point->getX()) <= a / 2) && (abs(point->getY()) <= a / 2) && ((pow((point->getX() - a / 2), 2) + pow(point->getY(), 2)) >= pow(b, 2)) && (point->getY() <= (point->getX() + a - c)) && ((pow((point->getX() + a / 2), 2) + pow((point->getY() + a / 2), 2)) >= pow(d, 2));
 }

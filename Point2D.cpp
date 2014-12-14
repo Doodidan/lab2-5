@@ -8,7 +8,7 @@
 #include <math.h>
 #include "Point2D.h"
 
-Point2D::Point2D(double a = 0) {
+Point2D::Point2D(double a) {
     x = y = a;
 }
 
