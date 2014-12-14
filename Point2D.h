@@ -8,6 +8,8 @@
 #ifndef POINT2D_H
 #define	POINT2D_H
 
+#include <iostream>
+
 using namespace std;
 
 class Point2D {
@@ -18,6 +20,7 @@ public:
     double getY() const;
     bool setX(double tx);
     bool setY(double ty);
+    void print() const;
 private:
     double x, y;
 };

@@ -6,15 +6,28 @@
  */
 
 #include <cmath>
-#include <math.h>
 #include "Object2DA9.h"
 #include "Point2D.h"
 
 Object2DA9::Object2DA9(double ta, double tb, double tc, double td, double tangle, const Point2D* tcentre) {
-    setA(ta);
-    setB(tb);
-    setC(tc);
-    setD(td);
+    bool verification = false;
+    a = ta;
+    if ((2 * tb) <= a) {
+        b = tb;
+    } else {
+        verification = true;
+    };
+    if ((tc<=a)&&((b + hypotenuse(tc) / 2) < hypotenuse(a, a / 2))) {
+        c = tc;
+    } else {
+        verification = true;
+    };
+    if (!setD(td)) {
+        verification = true;
+    };
+    if (verification) {
+        a = b = c = d = 0;
+    }
     setAngle(tangle);
     centre = new Point2D;
     setCentre(tcentre);
@@ -95,6 +108,16 @@ bool Object2DA9::setCentre(const Point2D* tcentre) {
     return true;
 }
 
+bool Object2DA9::setCentreX(double x) {
+    centre->setX(x);
+    return true;
+}
+
+bool Object2DA9::setCentreY(double y) {
+    centre->setY(y);
+    return true;
+}
+
 bool Object2DA9::move(double x, double y, double tangle) {
     centre->setX(centre->getX() + x);
     centre->setY(centre->getY() + y);
@@ -111,7 +134,13 @@ bool Object2DA9::rotate(double tangle) {
     return true;
 }
 
-bool Object2DA9::IsInside(const Point2D* startPoint) const {
+bool Object2DA9::isInside(double x, double y) const {
+    Point2D* point = new Point2D(x, y);
+    isInside(point);
+    delete point;
+}
+
+bool Object2DA9::isInside(const Point2D* startPoint) const {
     Point2D* point = moveAndRotatePoint(startPoint);
     bool check = checkInside(point);
     delete point;
@@ -119,11 +148,16 @@ bool Object2DA9::IsInside(const Point2D* startPoint) const {
     return check;
 }
 
+void Object2DA9::print() const {
+    cout << "a = " << a << ", b = " << b << ", c = " << c << ", d = " << d << ", angle = " << angle << ", centre: ";
+    centre->print();
+}
+
 Point2D* Object2DA9::moveAndRotatePoint(const Point2D* startPoint) const {
     double x, y;
     Point2D* point = movePoint(startPoint);
-    x = point->getX() * cos(angle) - point->getY() * sin(angle);
-    y = point->getX() * sin(angle) + point->getY() * cos(angle);
+    x = point->getX() * cos(-angle) - point->getY() * sin(-angle);
+    y = point->getX() * sin(-angle) + point->getY() * cos(-angle);
     point->setX(x);
     point->setY(y);
     return point;
@@ -142,19 +176,19 @@ double Object2DA9::hypotenuse(double a) const {
 }
 
 bool Object2DA9::checkA(double ta) const {
-    return ((b + d) < hypotenuse(ta, ta / 2)) && ((b + hypotenuse(c) / 2) < hypotenuse(ta, ta / 2)) && ((c + d) < ta) && (2 * b < ta);
+    return ((b + d) < hypotenuse(ta, ta / 2)) && ((b + hypotenuse(c) / 2) < hypotenuse(ta, ta / 2)) && ((c + d) <= ta) && (2 * b <= ta);
 }
 
 bool Object2DA9::checkB(double tb) const {
-    return ((tb + d) < hypotenuse(a, a / 2)) && ((tb + hypotenuse(c) / 2) < hypotenuse(a, a / 2)) && (2 * tb < a);
+    return ((tb + d) < hypotenuse(a, a / 2)) && ((tb + hypotenuse(c) / 2) < hypotenuse(a, a / 2)) && (2 * tb <= a);
 }
 
 bool Object2DA9::checkC(double tc) const {
-    return ((b + hypotenuse(tc) / 2) < hypotenuse(a, a / 2)) && ((tc + d) < a);
+    return ((b + hypotenuse(tc) / 2) < hypotenuse(a, a / 2)) && ((tc + d) <= a);
 }
 
 bool Object2DA9::checkD(double td) const {
-    return ((b + td) < hypotenuse(a, a / 2)) && ((c + td) < a);
+    return ((b + td) < hypotenuse(a, a / 2)) && ((c + td) <= a);
 }
 
 bool Object2DA9::checkInside(const Point2D* point) const {

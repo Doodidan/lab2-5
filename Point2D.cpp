@@ -5,7 +5,6 @@
  * Created on 14 Декабрь 2014 г., 10:56
  */
 
-#include <math.h>
 #include "Point2D.h"
 
 Point2D::Point2D(double a) {
@@ -27,8 +26,14 @@ double Point2D::getY() const {
 
 bool Point2D::setX(double tx) {
     x = tx;
+    return true;
 }
 
 bool Point2D::setY(double ty) {
     y = ty;
+    return true;
+}
+
+void Point2D::print() const {
+    cout << "x = " << x << ", y = " << y << endl;
 }

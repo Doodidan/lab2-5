@@ -26,10 +26,14 @@ public:
     bool setD(double td);
     bool setAngle(double tangle);
     bool setCentre(const Point2D* tcentre);
+    bool setCentreX(double x);
+    bool setCentreY(double y);
     bool move(double x, double y, double tangle = 0);
     bool move(const Point2D* delta, double tangle = 0);
     bool rotate(double tangle);
-    bool IsInside(const Point2D* startPoint) const;
+    bool isInside(double x, double y) const;
+    bool isInside(const Point2D* startPoint) const;
+    void print() const;
 private:
     double a, b, c, d, angle;
     Point2D* centre;
