@@ -11,7 +11,7 @@ void help();
 
 int main() {
     int menu = 1;
-    double k;
+    double k, z, u;
     bool is;
     Point2D* centre = new Point2D(3.1, -1.2);
     Object2DA9* object = new Object2DA9(10, 4, 3, 2, 1.5789, centre);
@@ -62,6 +62,19 @@ int main() {
                 object->setCentreY(k);
                 break;
             case 12:
+                cout << "Enter X: ";
+                cin >> k;
+                cout << "Enter Y: ";
+                cin >> z;
+                cout << "Enter Angle: ";
+                cin >> u;
+                object->move(k, z, u);
+                break;
+            case 13:
+                cin >> k;
+                object->rotate(k);
+                break;
+            case 14:
                 object->print();
                 point->print();
                 break;
@@ -88,5 +101,7 @@ void help() {
     cout << "9. Change Angle" << endl;
     cout << "10. Change X-Centre" << endl;
     cout << "11. Change Y-Centre" << endl;
-    cout << "12. Print parameters" << endl;
+    cout << "12. Move" << endl;
+    cout << "13. Rotate" << endl;
+    cout << "14. Print parameters" << endl;
 }
