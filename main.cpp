@@ -2,7 +2,7 @@
 * File:   main.cpp
 * Author: George
 *
-* Created on 12 George 2014 �., 18:00
+* Created on 12.11.2014, 18:00
 */
 
 #include "Object2DA9.h"

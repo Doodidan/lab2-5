@@ -2,7 +2,7 @@
 * File:   Point2D.h
 * Author: George
 *
-* Created on 12 George 2014 �., 18:04
+* Created on 12.11.2014, 18:04
 */
 
 #ifndef POINT2D_H

@@ -2,7 +2,7 @@
 * File:   Object2DA9.h
 * Author: George
 *
-* Created on 12 George 2014 �., 18:07
+* Created on 12.11.2014, 18:07
 */
 
 #ifndef OBJECT2DA9_H
@@ -48,8 +48,8 @@ public:
     void print() const;
 private:
     // variables
-    double a, b, c, d, angle;
-    Point2D* centre;
+    double p_a, p_b, p_c, p_d, p_angle;
+    Point2D* p_centre;
     // functions
     Point2D* moveAndRotatePoint(const Point2D* startPoint) const;
     Point2D* movePoint(const Point2D* point) const;

@@ -1,8 +1,8 @@
 /*
-* File:   main.cpp
+* File:   Point2D.cpp
 * Author: George
 *
-* Created on 14 George 2014 �., 10:56
+* Created on 14.11.2014, 10:56
 */
 
 #include "Point2D.h"
