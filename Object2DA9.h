@@ -16,8 +16,6 @@ public:
     Object2DA9(const Object2DA9* object);
     Object2DA9(double ta, double tb, double tc, double td, const Point2D* tcentre = new Point2D, double tangle = 0);
     Object2DA9(double ta, double tb, double tc, double td, double tx, double ty, double tangle = 0);
-    // destructors
-    ~Object2DA9();
     // functions
     double getA() const;
     double getB() const;
@@ -48,8 +46,7 @@ public:
     void print() const;
 private:
     // variables
-    double p_a, p_b, p_c, p_d, p_angle;
-    Point2D* p_centre;
+    double p_a, p_b, p_c, p_d, p_angle, p_centre_x, p_centre_y;
     // functions
     Point2D* moveAndRotatePoint(const Point2D* startPoint) const;
     Point2D* movePoint(const Point2D* point) const;
