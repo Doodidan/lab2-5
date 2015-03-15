@@ -14,15 +14,22 @@ using namespace std;
 
 class Point2D {
 public:
-	Point2D(double a = 0);
-	Point2D(double tx, double ty);
-	double getX() const;
-	double getY() const;
-	bool setX(double tx);
-	bool setY(double ty);
-	void print() const;
+    // constructors
+    Point2D(double a = 0);
+    Point2D(double tx, double ty);
+    Point2D(const Point2D* point);
+    // functions
+    double getX() const;
+    double getY() const;
+    Point2D* getClone() const;
+    bool setX(double tx);
+    bool setY(double ty);
+    bool setAll(double tx, double ty);
+    bool setAll(const Point2D* point);
+    void print() const;
 private:
-	double x, y;
+    // variables
+    double x, y;
 };
 
 #endif	/* POINT2D_H */
