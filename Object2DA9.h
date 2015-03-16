@@ -48,6 +48,7 @@ private:
     // variables
     double p_a, p_b, p_c, p_d, p_angle, p_centre_x, p_centre_y;
     // functions
+    void create(double ta, double tb, double tc, double td, const Point2D* tcentre = new Point2D, double tangle = 0);
     Point2D* moveAndRotatePoint(const Point2D* startPoint) const;
     Point2D* movePoint(const Point2D* point) const;
     double hypotenuse(double x, double y) const;
